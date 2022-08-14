@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function(){
     let usuario = localStorage.getItem('email');
     
     if(usuario == null) {
-        alert("no hay nadie logeado");
+        Swal.fire('No hay nadie ingresado')
         location.href="login.html"
     }
     
@@ -19,8 +19,6 @@ document.addEventListener("DOMContentLoaded", function(){
         if (result.isConfirmed) {
           Swal.fire(
             'Cerrando sesión',
-            '',
-            'success'
           )
             location.href="login.html"
             localStorage.clear();
