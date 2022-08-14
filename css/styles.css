@@ -188,3 +188,12 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.cuadro {
+  text-align: center;
+}
+
+.error {
+  border-color: rgb(255, 78, 78);
+}
+
