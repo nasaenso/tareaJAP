@@ -6,9 +6,9 @@ function showCategoriesList(array){
 
     let htmlContentToAppend = "";
     document.getElementById('nombreProduct').innerHTML = array.catName;
-
-    for(let i = 0; i < array.products.length; i++){ 
-        let producto = array.products[i];
+    // let producto ="";
+    for(let producto of array.products){ 
+        //  producto += productos.products;
         htmlContentToAppend += `
         <div class="list-group-item list-group-item-action">
             <div class="row">
