@@ -1,14 +1,12 @@
 //array donde se cargarán los datos recibidos:
-let categoriesArray = [];
+let productsArray = [];
 
 //función que recibe un array con los datos, y los muestra en pantalla a través el uso del DOM
-function showCategoriesList(array){
+function showProductsList(array){
 
     let htmlContentToAppend = "";
     document.getElementById('nombreProduct').innerHTML = array.catName;
-    // let producto ="";
     for(let producto of array.products){ 
-        //  producto += productos.products;
         htmlContentToAppend += `
         <div class="list-group-item list-group-item-action">
             <div class="row">
@@ -29,7 +27,7 @@ function showCategoriesList(array){
             </div>
         </div>
         `
-        document.getElementById("cat-list-container").innerHTML = htmlContentToAppend; 
+        document.getElementById("products-list-container").innerHTML = htmlContentToAppend; 
 
     }
 }
@@ -47,8 +45,8 @@ document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(LIST_URL).then(function(resultObj){
         if (resultObj.status === "ok")
         {
-            categoriesArray = resultObj.data;
-            showCategoriesList(categoriesArray);
+            productsArray = resultObj.data;
+            showProductsList(productsArray);
 
         }
     });
