@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
-    //verificar si o para logear
+    //verificar si hay usuario ingresado
     let usuario = localStorage.getItem('email');
     
     if(usuario == null) {
@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function(){
     });
     }
     
+ // Botón de cerrar sesión 
  document.getElementById('cierro').addEventListener('click', ()=>{
-    
   Swal.fire({
     title: '¿Quiere cerrar sesión?',
     icon: 'question',

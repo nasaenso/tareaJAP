@@ -189,10 +189,12 @@ a.custom-card:hover {
   color: orange;
 }
 
+/* Alinear lo que se ve en login */
 .cuadro {
   text-align: center;
 }
 
+/* Marcar los bordes del login */
 .error {
   border-color: rgb(255, 78, 78);
 }

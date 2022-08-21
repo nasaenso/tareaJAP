@@ -5,6 +5,7 @@ let productsArray = [];
 function showProductsList(array){
 
     let htmlContentToAppend = "";
+    //Nombre de la categoria
     document.getElementById('nombreProduct').innerHTML = array.catName;
     for(let producto of array.products){ 
         htmlContentToAppend += `
@@ -52,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 });
 
+// Botón de cerrar sesión
 document.getElementById('cierro').addEventListener('click', ()=>{
     
     Swal.fire({

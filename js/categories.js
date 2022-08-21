@@ -142,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 });
 
+// Botón de cerrar sesión
 document.getElementById('cierro').addEventListener('click', ()=>{
     
     Swal.fire({
