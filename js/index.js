@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function(){
   }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-        title: 'Cerrando sesión',
+        title: '¡Sesión cerrada con éxito!',
         icon: 'success'
       }).then(function() {
           window.location = "login.html";
