@@ -1,16 +1,20 @@
 document.addEventListener("DOMContentLoaded", function(){
-    //verificar si hay usuario ingresado
-    let usuario = localStorage.getItem('email');
-    
-    if(usuario == null) {
-      Swal.fire({
-        title: 'No hay nadie ingresado',
-        text: 'Por favor, inicie sesión',
-        icon: 'error'
+  
+  let usuario = localStorage.getItem('email');
+ 
+  // Mostrar nombre del usuario
+  document.getElementById('nombreUsuario').innerHTML = usuario;
+  
+  // Verificar si hay usuario ingresado
+  if(usuario == null) {
+    Swal.fire({
+      title: 'No hay nadie ingresado',
+      text: 'Por favor, inicie sesión',
+      icon: 'error'
     }).then(function() {
-        window.location = "login.html";
-    });
-    }
+      window.location = "login.html";
+      });
+  }
     
  // Botón de cerrar sesión 
  document.getElementById('cierro').addEventListener('click', ()=>{
