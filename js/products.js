@@ -43,7 +43,8 @@ EJECUCIÓN:
 */
 
 document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(PRODUCTS_URL + localStorage.getItem('catID') + EXT_TYPE).then(function(resultObj){
+    url = PRODUCTS_URL + localStorage.getItem('catID') + EXT_TYPE;
+    getJSONData(url).then(function(resultObj){
         if (resultObj.status === "ok")
         {
             productsArray = resultObj.data;
