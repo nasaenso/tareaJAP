@@ -8,6 +8,7 @@ let maxCount = undefined;
 
 function sortCategories(criteria, array){
     let result = [];
+
     if (criteria === ORDER_ASC_BY_NAME)
     {
         result = array.sort(function(a, b) {
@@ -22,7 +23,9 @@ function sortCategories(criteria, array){
             return 0;
         });
     }else if (criteria === ORDER_BY_PROD_COUNT){
+        console.log(array);
         result = array.sort(function(a, b) {
+            
             let aCount = parseInt(a.productCount);
             let bCount = parseInt(b.productCount);
 
@@ -141,27 +144,3 @@ document.addEventListener("DOMContentLoaded", function(e){
         showCategoriesList();
     });
 });
-
-// Botón de cerrar sesión
-document.getElementById('cierro').addEventListener('click', ()=>{
-    
-    Swal.fire({
-      title: '¿Quiere cerrar sesión?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí'
-    }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-          title: '¡Sesión cerrada con éxito!',
-          icon: 'success'
-        }).then(function() {
-            window.location = "login.html";
-            localStorage.clear();
-          });
-        }
-      })
-   })
-   

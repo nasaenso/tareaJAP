@@ -33,10 +33,12 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item d-flex">
+            <!-- Mostrar nombre del usuario -->
+            <a href="" class="nav-link active" id="nombreUsuario"></a>
             <!-- Botón de cerrar -->
             <button class="btn btn-outline-primary" id="cierro">Cerrar sesión</button>
-          </li>
+         </li>
         </ul>
       </div>
     </div>
@@ -48,6 +50,39 @@
             <p>Verás aquí todos los productos de la categoría <span id="nombreProduct"></span></p>
         </div>
         <div class="container">
+          <div class="row">
+            <div class="col text-end">
+              <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+                <input type="radio" class="btn-check" name="options" id="sortDesc">
+                <label class="btn btn-light" for="sortDesc"><i class="fas fa-sort-amount-down mr-1"></i>$</label>
+                <input type="radio" class="btn-check" name="options" id="sortAsc">
+                <label class="btn btn-light" for="sortAsc"><i class="fas fa-sort-amount-up mr-1"></i>$</label>
+                <input type="radio" class="btn-check" name="options" id="sortRel" checked>
+                <label class="btn btn-light" for="sortRel"><i class="fas fa-sort-amount-down mr-1"></i>Rel.</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+              <div class="row container p-0 m-0">
+                <div class="col">
+                  <p class="font-weight-normal text-end my-2">Precio</p>
+                </div>
+                <div class="col">
+                  <input class="form-control" type="number" placeholder="min." id="min">
+                </div>
+                <div class="col">
+                  <input class="form-control" type="number" placeholder="máx." id="max">
+                </div>
+                <div class="col-3 p-0">
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-light btn-block" id="filtrar">Filtrar</button>
+                    <button class="btn btn-link btn-sm" id="limpiar">Limpiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
             <div class="row">
                 <div class="list-group" id="products-list-container">
 

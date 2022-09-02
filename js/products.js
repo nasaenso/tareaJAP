@@ -1,13 +1,47 @@
 //array donde se cargarán los datos recibidos:
 let productsArray = [];
+let listaFiltrada = undefined;
+
+function filtrarPorPrecio(){
+    
+    let minCost = parseInt(document.getElementById('min').value);
+    let maxCost= parseInt(document.getElementById('max').value);
+    listaFiltrada = productsArray.filter(array => array.cost >= minCost && array.cost <= maxCost );
+
+    showProductsList(listaFiltrada);
+}
+
+function sortSiFiltrado(array,valor){
+   
+    if(listaFiltrada !== undefined){
+    sortProducts(listaFiltrada,valor);
+    
+    }else {
+    sortProducts(array,valor);
+    }
+}
+
+function sortProducts(array,valor){
+
+    if(valor === "sortAsc") {
+      array.sort((ant,sig)=>sig.cost-ant.cost);
+    
+    }else if (valor ==="sortDesc"){
+      array.sort((ant,sig)=>ant.cost-sig.cost);
+    
+    }else if (valor ==="sortRel"){
+        array.sort((ant,sig)=>sig.soldCount-ant.soldCount);
+      }
+
+    showProductsList(array);
+  }
 
 //función que recibe un array con los datos, y los muestra en pantalla a través el uso del DOM
 function showProductsList(array){
 
     let htmlContentToAppend = "";
-    //Nombre de la categoria
-    document.getElementById('nombreProduct').innerHTML = array.catName;
-    for(let producto of array.products){ 
+    for(let producto of array){ 
+
         htmlContentToAppend += `
         <div class="list-group-item list-group-item-action">
             <div class="row">
@@ -28,52 +62,58 @@ function showProductsList(array){
             </div>
         </div>
         `
-        document.getElementById("products-list-container").innerHTML = htmlContentToAppend; 
-
     }
+        document.getElementById("products-list-container").innerHTML = htmlContentToAppend;
 }
 
-/* 
-EJECUCIÓN:
-
--Al cargar la página se llama a getJSONData() pasándole por parámetro la dirección para obtener el listado.
--Se verifica el estado del objeto que devuelve, y, si es correcto, se cargan los datos en categoriesArray.
--Por último, se llama a showCategoriesList() pasándole por parámetro categoriesArray.
-
-*/
-
 document.addEventListener("DOMContentLoaded", function(e){
+   
     url = PRODUCTS_URL + localStorage.getItem('catID') + EXT_TYPE;
+   
     getJSONData(url).then(function(resultObj){
-        if (resultObj.status === "ok")
-        {
-            productsArray = resultObj.data;
+        if (resultObj.status === "ok"){
+            
+            productsArray = resultObj.data.products;
             showProductsList(productsArray);
+
+            // Mostrar el nombre de la categoría
+            let nombreCat = resultObj.data.catName;
+            document.getElementById('nombreProduct').innerHTML = nombreCat;
 
         }
     });
-});
+    document.getElementById('filtrar').addEventListener('click',()=>{
+        filtrarPorPrecio();
+        document.getElementById('min').value="";
+        document.getElementById('max').value="";
 
-// Botón de cerrar sesión
-document.getElementById('cierro').addEventListener('click', ()=>{
-    
-    Swal.fire({
-      title: '¿Quiere cerrar sesión?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí'
-    }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-          title: '¡Sesión cerrada con éxito!',
-          icon: 'success'
-        }).then(function() {
-            window.location = "login.html";
-            localStorage.clear();
-          });
-        }
-      })
-   })
- 
+    });
+    document.getElementById('limpiar').addEventListener('click',()=>{
+        // Para que al darle a "limpiar" la lista vuelva a estar completa
+        listaFiltrada= undefined;
+        showProductsList(productsArray);
+        sessionStorage.removeItem('sort');
+
+    });
+    document.getElementById('sortAsc').addEventListener('click', ()=>{
+        // no tengo idea de si se pueden resumir las lineas de abajo ni tampoco si es la mejor forma
+        sessionStorage.setItem('sort', 'sortAsc');
+        let valor = sessionStorage.getItem('sort');
+        sortSiFiltrado(productsArray,valor);
+  
+      });
+      document.getElementById('sortDesc').addEventListener('click', ()=>{
+        sessionStorage.setItem('sort', 'sortDesc');
+        let valor = sessionStorage.getItem('sort');
+        sortSiFiltrado(productsArray,valor);
+
+    });
+      document.getElementById('sortRel').addEventListener('click', ()=>{
+        sessionStorage.setItem('sort', 'sortRel');
+        let valor = sessionStorage.getItem('sort');
+        sortSiFiltrado(productsArray,valor);
+
+    });
+    showProductsList(productsArray);
+
+});

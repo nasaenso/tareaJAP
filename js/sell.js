@@ -147,26 +147,4 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     });
 });
-// Botón de cerrar sesión 
-document.getElementById('cierro').addEventListener('click', ()=>{
-    
-    Swal.fire({
-      title: '¿Quiere cerrar sesión?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí'
-    }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-          title: '¡Sesión cerrada con éxito!',
-          icon: 'success'
-        }).then(function() {
-            window.location = "login.html";
-            localStorage.clear();
-          });
-        }
-      })
-   })
- 
+
