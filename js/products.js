@@ -1,6 +1,6 @@
 //array donde se cargarán los datos recibidos:
 let productsArray = [];
-let listaFiltrada = undefined;
+let arrayFiltrado = undefined;
 let valorMin = document.getElementById('min');
 let valorMax = document.getElementById('max');
 
@@ -29,23 +29,23 @@ function filtrarPorPrecio(){
         showProductsList(productsArray);
 
     }else if (minCost != undefined && maxCost == undefined){
-        listaFiltrada = productsArray.filter(array => array.cost >= minCost);
-        showProductsList(listaFiltrada);
+        arrayFiltrado = productsArray.filter(array => array.cost >= minCost);
+        showProductsList(arrayFiltrado);
 
     }else if(minCost == undefined && maxCost != undefined){
-        listaFiltrada = productsArray.filter(array => array.cost <= maxCost);
-        showProductsList(listaFiltrada);
+        arrayFiltrado = productsArray.filter(array => array.cost <= maxCost);
+        showProductsList(arrayFiltrado);
 
     }else if(minCost != undefined && maxCost !=undefined){
-        listaFiltrada = productsArray.filter(array => array.cost >= minCost && array.cost <= maxCost );
-        showProductsList(listaFiltrada);
+        arrayFiltrado = productsArray.filter(array => array.cost >= minCost && array.cost <= maxCost );
+        showProductsList(arrayFiltrado);
     }
 }
 
- //como hacer el sort dependiendo de que lista tengamos
+ //como hacer el sort dependiendo de que array tengamos
 function sortSiFiltrado(array, criteria){
-    if(listaFiltrada !== undefined){
-        sortProducts(listaFiltrada, criteria);
+    if(arrayFiltrado !== undefined){
+        sortProducts(arrayFiltrado, criteria);
     
     }else {
         sortProducts(array, criteria);
@@ -117,8 +117,8 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     });
     document.getElementById('limpiar').addEventListener('click',()=>{
-        // Para que al darle a "limpiar" la lista vuelva a estar completa
-        listaFiltrada= undefined;
+        // Para que al darle a "limpiar" la array vuelva a estar completa
+        arrayFiltrado= undefined;
         
         valorMax.value = "";
         valorMin.value = "";
