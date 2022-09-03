@@ -1,44 +1,74 @@
 //array donde se cargarán los datos recibidos:
 let productsArray = [];
 let listaFiltrada = undefined;
+let valorMin = document.getElementById('min');
+let valorMax = document.getElementById('max');
 
 function filtrarPorPrecio(){
     
-    let minCost = parseInt(document.getElementById('min').value);
-    let maxCost= parseInt(document.getElementById('max').value);
-    listaFiltrada = productsArray.filter(array => array.cost >= minCost && array.cost <= maxCost );
+    let minCost = parseInt(valorMin.value);
+    let maxCost= parseInt(valorMax.value);
 
-    showProductsList(listaFiltrada);
-}
+    // asignar valor 
+    if ((minCost != undefined) && (minCost != "") && (parseInt(minCost)) >= 0){
+        minCost = parseInt(minCost);
+    }
+    else{
+        minCost = undefined;
+    }
 
-function sortSiFiltrado(array,valor){
-   
-    if(listaFiltrada !== undefined){
-    sortProducts(listaFiltrada,valor);
+    if ((maxCost != undefined) && (maxCost != "") && (parseInt(maxCost)) >= 0){
+        maxCost = parseInt(maxCost);
+    }
+    else{
+        maxCost = undefined;
+    }
     
-    }else {
-    sortProducts(array,valor);
+    // Como filtrar en los 4 casos
+    if (minCost == undefined && maxCost ==undefined){
+        showProductsList(productsArray);
+
+    }else if (minCost != undefined && maxCost == undefined){
+        listaFiltrada = productsArray.filter(array => array.cost >= minCost);
+        showProductsList(listaFiltrada);
+
+    }else if(minCost == undefined && maxCost != undefined){
+        listaFiltrada = productsArray.filter(array => array.cost <= maxCost);
+        showProductsList(listaFiltrada);
+
+    }else if(minCost != undefined && maxCost !=undefined){
+        listaFiltrada = productsArray.filter(array => array.cost >= minCost && array.cost <= maxCost );
+        showProductsList(listaFiltrada);
     }
 }
 
-function sortProducts(array,valor){
+ //como hacer el sort dependiendo de que lista tengamos
+function sortSiFiltrado(array, criteria){
+    if(listaFiltrada !== undefined){
+        sortProducts(listaFiltrada, criteria);
+    
+    }else {
+        sortProducts(array, criteria);
+    }
+}
 
-    if(valor === "sortAsc") {
+//cual sort hacer
+function sortProducts(array, criteria){
+    if(criteria === "sortDesc") {
       array.sort((ant,sig)=>sig.cost-ant.cost);
     
-    }else if (valor ==="sortDesc"){
+    }else if (criteria ==="sortAsc"){
       array.sort((ant,sig)=>ant.cost-sig.cost);
     
-    }else if (valor ==="sortRel"){
+    }else if (criteria ==="sortRel"){
         array.sort((ant,sig)=>sig.soldCount-ant.soldCount);
-      }
-
+    }
     showProductsList(array);
   }
 
 //función que recibe un array con los datos, y los muestra en pantalla a través el uso del DOM
 function showProductsList(array){
-
+    
     let htmlContentToAppend = "";
     for(let producto of array){ 
 
@@ -84,34 +114,31 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
     document.getElementById('filtrar').addEventListener('click',()=>{
         filtrarPorPrecio();
-        document.getElementById('min').value="";
-        document.getElementById('max').value="";
 
     });
     document.getElementById('limpiar').addEventListener('click',()=>{
         // Para que al darle a "limpiar" la lista vuelva a estar completa
         listaFiltrada= undefined;
+        
+        valorMax.value = "";
+        valorMin.value = "";
         showProductsList(productsArray);
-        sessionStorage.removeItem('sort');
+        
 
     });
-    document.getElementById('sortAsc').addEventListener('click', ()=>{
-        // no tengo idea de si se pueden resumir las lineas de abajo ni tampoco si es la mejor forma
-        sessionStorage.setItem('sort', 'sortAsc');
-        let valor = sessionStorage.getItem('sort');
-        sortSiFiltrado(productsArray,valor);
+    document.getElementById('sortDesc').addEventListener('click', ()=>{
+        let criteria = "sortDesc"
+        sortSiFiltrado(productsArray, criteria);
   
       });
-      document.getElementById('sortDesc').addEventListener('click', ()=>{
-        sessionStorage.setItem('sort', 'sortDesc');
-        let valor = sessionStorage.getItem('sort');
-        sortSiFiltrado(productsArray,valor);
+      document.getElementById('sortAsc').addEventListener('click', ()=>{
+        let criteria = "sortAsc"
+        sortSiFiltrado(productsArray, criteria);
 
     });
       document.getElementById('sortRel').addEventListener('click', ()=>{
-        sessionStorage.setItem('sort', 'sortRel');
-        let valor = sessionStorage.getItem('sort');
-        sortSiFiltrado(productsArray,valor);
+        let criteria = "sortRel"
+        sortSiFiltrado(productsArray, criteria);
 
     });
     showProductsList(productsArray);
