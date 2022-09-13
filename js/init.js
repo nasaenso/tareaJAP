@@ -8,6 +8,7 @@ const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 //Array de autos
 const LIST_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+const urlprueba = "https://japceibal.github.io/emercado-api/products/50921.json";
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
