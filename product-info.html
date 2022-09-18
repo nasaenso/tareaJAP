@@ -77,8 +77,8 @@
            
         </div>
 
-        <div class="col-md-1"><!-- botón para volver a productos -->
-          <a href="products.html"><i class="fas fa-chevron-left"><span class="d-flex justify-content-center"> Volver a productos</span></i></a>
+        <div class="col d-flex justify-content-center"><!-- botón para volver a productos -->
+          <a href="products.html"><i class="fas fa-arrow-left"><span class=""> Volver</span></i></a>
         </div>
 
         <div><!-- donde meto el innerhtml de los comentarios -->
@@ -89,7 +89,7 @@
         </div> 
 
         <div> <!--opinión del usuario -->
-          <div class="mb-3 mt-3 ">
+          <div class="mb-3 mt-3">
             <label for="opinion" class="form-label">Tu opinión:</label>
             <textarea type="text" class="form-control" rows="3" id="opinion" name="opinion"></textarea>
           </div>
@@ -99,7 +99,7 @@
               <label for="puntuacion" class="col-form-label">Tu puntuación:</label>
             </div>
             <div class="col-auto">
-              <select class="form-select" aria-describedby="passwordHelpInline">
+              <select class="form-select" id="puntaje">
               <option value="1" selected>1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -109,7 +109,7 @@
             </div>
           </div>
           
-          <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+          <button type="submit" class="btn btn-primary mt-3" id="enviar">Enviar</button>
         </div>
 
       </div>

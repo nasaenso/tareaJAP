@@ -3,7 +3,7 @@ let commentsArray = [];
 
 let productID = localStorage.getItem('productID');
 
-// para mostrar la informacion del producto
+//Para mostrar la informacion del producto
 function showProductsInfoList(array){
     
     let htmlContentToAppend = "";
@@ -13,19 +13,19 @@ function showProductsInfoList(array){
         <h4 class="mb-4" >Información del producto</h4>
 
             <div>
-                <h4 class="m-0">Precio</h4>
+                <h5 class="m-0">Precio</h5>
                 <p> ${array.currency} ${array.cost}</p>
             </div>
             <div>
-                <h4 class="m-0">Descripción</h4>
+                <h5 class="m-0">Descripción</h5>
                 <p> ${array.description}</p>
             </div>
             <div>
-                <h4 class="m-0">Categoría</h4>
+                <h5 class="m-0">Categoría</h5>
                 <p> ${array.category}</p>
             </div>
             <div>
-                <h4 class="m-0">Cantidad de vendidos</h4>
+                <h5 class="m-0">Cantidad de vendidos</h5>
                 <p> ${array.soldCount}</p>
             </div>
         </div>
@@ -33,7 +33,7 @@ function showProductsInfoList(array){
         document.getElementById("products-list-info-container").innerHTML = htmlContentToAppend;
 }
 
-// para mostrar las imagenes
+//Para mostrar las imagenes
 function mostrarImagenes(array){
 
     let imagenes = "";
@@ -59,35 +59,36 @@ function mostrarImagenes(array){
             document.getElementById("imagenes").innerHTML = imagenes;
 
 }
-
+//Para mostrar los comentarios
 function mostrarComments(array){
     let comentarios = "";
     for (let comentario of array){
     
         comentarios += `
             
-                <li class="list-group-item">
-                    <b>${comentario.user}</b> - ${comentario.dateTime} -  ${puntuacion(comentario.score)} <br>
-                    ${comentario.description}
-                </li>
+            <li class="list-group-item">
+                <div><b>${comentario.user}</b> - ${comentario.dateTime} -  ${puntuacion(comentario.score)}</div>
+                ${comentario.description}
+            </li>
         `
     }
     document.getElementById("comentarios").innerHTML = comentarios;
 }
-
+//Para que ponga 5 estrellitas y vea cuales están marcadas
 function puntuacion(array){
     let estrellas ="";
     
     for (let i = 1; i <= 5; i++){
         if(i <= array){
-            estrellas += `<i class="fa fa-star checked"></i>`;
+            estrellas += `<i class="fas fa-star checked"></i>`;
             
         }else {
-            estrellas += `<i class="fa fa-star"></i>`;
+            estrellas += `<i class="far fa-star checked"></i>`;
         } 
     }
     return estrellas;
 }
+
 
 document.addEventListener("DOMContentLoaded", function(e){
    
@@ -100,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function(e){
             productsInfoArray = resultObj.data;
             showProductsInfoList(productsInfoArray);
 
+            //Mostrar el nombre del producto
             mostrarImagenes(productsInfoArray)
             document.getElementById('nombreProduct').innerHTML = productsInfoArray.name;
         }
@@ -110,7 +112,8 @@ document.addEventListener("DOMContentLoaded", function(e){
             
             commentsArray = resultObj.data;
             mostrarComments(commentsArray);
-
         }
+        document.getElementById('enviar').addEventListener('click', ()=>{
+        })
     });
 });

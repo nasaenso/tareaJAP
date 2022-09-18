@@ -79,7 +79,7 @@ function showProductsList(array){
     for(let producto of array){ 
 
         htmlContentToAppend += `
-        <div onclick="productsID(${producto.id})"class="list-group-item list-group-item-action">
+        <div onclick="productsID(${producto.id})"class="list-group-item list-group-item-action cursor-active">
             <div class="row">
                 <div class="col-3">
                     <img src="` + producto.image + `" alt="product image" class="img-thumbnail">
