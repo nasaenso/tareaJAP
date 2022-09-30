@@ -9,7 +9,7 @@ function showProductsInfoList(array){
     let htmlContentToAppend = "";
         htmlContentToAppend += `
                 
-        <div> 
+        <div class=""> 
         <h4 class="mb-4" >Información del producto</h4>
 
             <div>
@@ -88,13 +88,30 @@ function puntuacion(array){
     }
     return estrellas;
 }
+function relatedProductID(id) {
+    localStorage.setItem("productID", id);
+    window.location = "product-info.html";
+}
 
+function productosRelacionados(array){
+    let showRelatedProducts ="";
+    
+    for (let product of array.relatedProducts){
+        showRelatedProducts +=`
+            <div class="mb-0 cursor-active" onclick="relatedProductID(${product.id})">
+                            
+                <h6>${product.name}</h6>
+                <img src="${product.image}" class="tamaño mx-auto d-block">
+            </div> 
+        `
+    }
+    document.getElementById('relatedProducts').innerHTML=showRelatedProducts;
+}
 
 document.addEventListener("DOMContentLoaded", function(e){
-   
-    INFO_URL = PRODUCT_INFO_URL + productID + EXT_TYPE;
     COMMENTS_URL = PRODUCT_INFO_COMMENTS_URL + productID + EXT_TYPE;
-   
+    INFO_URL = PRODUCT_INFO_URL + productID + EXT_TYPE;
+    
     getJSONData(INFO_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
             
@@ -104,6 +121,8 @@ document.addEventListener("DOMContentLoaded", function(e){
             //Mostrar el nombre del producto
             mostrarImagenes(productsInfoArray)
             document.getElementById('nombreProduct').innerHTML = productsInfoArray.name;
+
+            productosRelacionados(productsInfoArray);
         }
     });
 

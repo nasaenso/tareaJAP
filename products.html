@@ -33,12 +33,18 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item d-flex">
-            <!-- Mostrar nombre del usuario -->
-            <a href="" class="nav-link active" id="nombreUsuario"></a>
-            <!-- Botón de cerrar -->
-            <button class="btn btn-outline-primary" id="cierro">Cerrar sesión</button>
-         </li>
+          <li class="nav-item">
+            <!-- Mostrar lista desplegable -->
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="nombreUsuario" data-bs-toggle="dropdown" aria-expanded="false">
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+                <li><a class="dropdown-item" href="my-profile">Mi perfil</a></li>
+                <li><a class="dropdown-item" href="#" id="cierro">Cerrar sesión</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -63,8 +69,16 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+            <div class="col mb-1 container">
               <div class="row container p-0 m-0">
+                <div class="col input-group rounded">
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                  </span>
+                  <input type="search" class="form-control rounded" id="buscador" placeholder="Search">
+                  
+                </div>
+                
                 <div class="col">
                   <p class="font-weight-normal text-end my-2">Precio</p>
                 </div>

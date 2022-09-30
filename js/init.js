@@ -59,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function(){
       window.location = "login.html";
       });
   }
-    
  // Botón de cerrar sesión 
  document.getElementById('cierro').addEventListener('click', ()=>{
   Swal.fire({
@@ -76,8 +75,7 @@ document.addEventListener("DOMContentLoaded", function(){
         icon: 'success'
       }).then(function() {
           window.location = "login.html";
-          // localStorage.clear();
-          localStorage.removeItem('email');
+            localStorage.removeItem('email');
         });
       }
     })

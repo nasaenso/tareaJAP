@@ -64,6 +64,8 @@ function sortProducts(array, criteria){
         array.sort((ant,sig)=>sig.soldCount-ant.soldCount);
     }
     showProductsList(array);
+
+
 }
 
   function productsID(id) {
@@ -71,6 +73,14 @@ function sortProducts(array, criteria){
     window.location = "product-info.html"
 }
 
+function search(array) {
+    let buscado = document.getElementById("buscador").value;
+    
+    let filtrada = array.filter(producto => {
+        return (producto.name.toLowerCase().indexOf(buscado.toLowerCase()) > -1) || (producto.description.toLowerCase().indexOf(buscado.toLowerCase()) > -1);
+    })
+    showProductsList(filtrada);
+  }
 
 //función que recibe un array con los datos, y los muestra en pantalla a través el uso del DOM
 function showProductsList(array){
@@ -105,7 +115,6 @@ function showProductsList(array){
 document.addEventListener("DOMContentLoaded", function(e){
    
     url = PRODUCTS_URL + localStorage.getItem('catID') + EXT_TYPE;
-   
     getJSONData(url).then(function(resultObj){
         if (resultObj.status === "ok"){
             
@@ -118,9 +127,14 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         }
     });
+
+        document.getElementById('buscador').addEventListener('keyup',()=>{
+            search(productsArray);
+        });
+
     document.getElementById('filtrar').addEventListener('click',()=>{
         filtrarPorPrecio();
-
+        
     });
     document.getElementById('limpiar').addEventListener('click',()=>{
         // Para que al darle a "limpiar" la array vuelva a estar completa
