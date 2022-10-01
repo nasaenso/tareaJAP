@@ -36,27 +36,26 @@ function showProductsInfoList(array){
 //Para mostrar las imagenes
 function mostrarImagenes(array){
 
-    let imagenes = "";
-        imagenes +=`
+    let imagenenInicial = "";
+    let imagenes ="";
+
+    imagenenInicial =`
 
             <div class="carousel-item active" data-bs-interval="10000">
             <img src="${array.images[0]}" class="d-block w-100" alt="Imágen de ejemplo del producto">
             </div>
+        `;
+
+    for(let i = 1; i < array.images.length; i++){
+        let img = array.images[i];
+        imagenes +=`
 
             <div class="carousel-item" data-bs-interval="2000">
-            <img src="${array.images[1]}" class="d-block w-100" alt="Imágen de ejemplo del producto">
+            <img src="${img}" class="d-block w-100" alt="Imágen de ejemplo del producto">
             </div>
-
-            <div class="carousel-item">
-            <img src="${array.images[2]}" class="d-block w-100" alt="Imágen de ejemplo del producto">
-            </div>
-
-            <div class="carousel-item">
-            <img src="${array.images[3]}" class="d-block w-100" alt="Imágen de ejemplo del producto">
-            </div>
-            `;
-
-            document.getElementById("imagenes").innerHTML = imagenes;
+        `
+    }
+    document.getElementById("imagenes").innerHTML =  imagenenInicial + imagenes;
 
 }
 //Para mostrar los comentarios
