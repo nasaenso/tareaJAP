@@ -57,8 +57,8 @@
         </div>
         <div class="container">
           <div class="row">
-            <div class="col text-end">
-              <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+            <div class="col ps-0">
+              <div class="btn-group btn-group-toggle mb-2" data-bs-toggle="buttons">
                 <input type="radio" class="btn-check" name="options" id="sortDesc">
                 <label class="btn btn-light" for="sortDesc"><i class="fas fa-sort-amount-down mr-1"></i>$</label>
                 <input type="radio" class="btn-check" name="options" id="sortAsc">
@@ -69,40 +69,37 @@
             </div>
           </div>
           <div class="row">
-            <div class="col mb-1 container">
-              <div class="row container p-0 m-0">
-                <div class="col input-group rounded">
-                  <span class="input-group-text border-0" id="search-addon">
-                    <i class="fas fa-search"></i>
-                  </span>
-                  <input type="search" class="form-control rounded" id="buscador" placeholder="Search">
-                  
+            <div class="col-lg-6 col-md-5 col-sm-12 col-12 mb-2 ps-0">
+              <input type="search" class="form-control rounded w-75" id="buscador" placeholder="Buscar...">
+            </div>
+            
+            <div class="col-lg-6 col-md-7 col-sm-12 col-12 ps-0 pe-1">
+              <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-3 ps-0 pe-1">
+                  <p class="font-weight-normal my-2 ps-3">Precio</p>
                 </div>
-                
-                <div class="col">
-                  <p class="font-weight-normal text-end my-2">Precio</p>
-                </div>
-                <div class="col">
+
+                <div class="col-lg-3 col-md-2 col-sm-3 col-4 pe-1 ps-1">
                   <input class="form-control" type="number" placeholder="min." id="min">
                 </div>
-                <div class="col">
+
+                <div class="col-lg-3 col-md-2 col-sm-3 col-4 ps-1 pe-1">
                   <input class="form-control" type="number" placeholder="máx." id="max">
                 </div>
-                <div class="col-3 p-0">
+
+                <div class="col-lg-4 col-md-4 col-sm-4 col-8 ps-0 pe-1">
                   <div class="btn-group" role="group">
                     <button class="btn btn-light btn-block" id="filtrar">Filtrar</button>
                     <button class="btn btn-link btn-sm" id="limpiar">Limpiar</button>
                   </div>
                 </div>
               </div>
-            </div>
           </div>
-            <div class="row">
-                <div class="list-group" id="products-list-container">
+          <div class="row">
+              <div class="list-group" id="products-list-container">
 
-                </div>
-            </div>
-        </div>
+              </div>
+          </div>
     </main>
     <div id="spinner-wrapper">
       <div class="lds-ring">

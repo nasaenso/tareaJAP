@@ -198,7 +198,15 @@ a.custom-card:hover {
 .error {
   border-color: rgb(255, 78, 78);
 }
+
+/* Para las imágenes de productos relacionados */
 .tamaño {
   width: 85%;
-  
 }
+
+/* Para las imágenes del carrito y el tamaño del input */
+.cartSizing{
+  max-width: 55px;
+
+}
+

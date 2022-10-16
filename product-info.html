@@ -57,7 +57,7 @@
     <div class="container" class="row text-center">
       <div class="row">
 
-        <div class="col-md-5 pe-3 pb-4"> <!-- imágenes -->
+        <div class="col-md-5 col-lg-5 pe-3 pb-4"> <!-- imágenes -->
 
           <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <h4 class="d-flex justify-content-center mb-4" >Imágenes ilustrativas</h4>
@@ -79,17 +79,21 @@
           </div>
         </div>
 
-        <div id="products-list-info-container" class="col-md-5 pb-4"> <!-- donde meto el innerhtml de la info -->
+        <div id="products-list-info-container" class="col-md-5 col-lg-5 pb-4"> <!-- donde meto el innerhtml de la info -->
            
         </div>
 
-        <div class="col text-center pb-4">
+        <div class="col-md-2 col-lg-2 text-center pb-4">
           
-          <div class="d-flex justify-content-center"><!-- botón para volver a productos -->
+          <!-- botón para volver a productos -->
+          <!-- <div class="d-flex justify-content-center">
             <a href="products.html"><i class="fas fa-arrow-left"><span class=""> Volver</span></i></a>
+          </div> -->
+          <div>
+            <button type="button" class="btn btn-success" id="addToCart"> <i class="fas fa-cart-plus"></i>  Comprar</i></button>
           </div>
           <div>
-            <div class="mt-4"><!--para mostrar los productos relacionados-->
+            <div class="mt-2"><!--para mostrar los productos relacionados-->
               <h5 class="">Productos relacionados</h5>
               <div id="relatedProducts"></div>
 
@@ -97,7 +101,7 @@
           </div>
           
         </div>
-        
+        <hr>
         <div><!-- donde meto el innerhtml de los comentarios -->
           <h4 class="mb-4">Comentarios </h4>
           <ul class="list-group" id="comentarios"> 
@@ -116,7 +120,7 @@
               <label for="puntuacion" class="col-form-label">Tu puntuación:</label>
             </div>
             <div class="col-auto">
-              <select class="form-select" id="puntaje">
+              <select class="form-select" id="score">
               <option value="1" selected>1</option>
               <option value="2">2</option>
               <option value="3">3</option>

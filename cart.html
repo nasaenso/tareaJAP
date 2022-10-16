@@ -50,8 +50,80 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      
+      <h2 class="d-flex justify-content-center  mt-4 mb-5">Carrito de compras</h2>
+      <h5 class="mb-3">Artículos a comprar</h5>
+      
+      <div class="table-responsive"> 
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Costo</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Subtotal</th>
+            </tr>
+        </thead>
+        <!-- donde va la tabla -->
+        <tbody id="cart">
+
+        </tbody>
+        </table>
+      </div>
+
+      <hr>
+
+      <div>
+        <h5 class="mb-3">Tipo de envío</h5>
+
+        <div class="row"><!-- esto está para mejorar -->
+          <div class="col-lg-12 mb-2">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-5 col-7 pe-0">
+
+                <select class="form-select" id="inputGroupSelect">
+                  <option selected class="d-block">Eliga una opción...</option>
+                  <option value="1">Premium 2 a 5 días (15%)</option>
+                  <option value="2"> Express 5 a 8 días (7%)</option>
+                  <option value="3">Standard 12 a 15 días (5%)</option>
+                </select>
+
+              </div>
+              
+              <label class="input-group-text col-lg-2 col-md-2 col-sm-2 col-4 d-block" for="inputGroupSelect02">Opciones</label>
+
+            </div>
+          </div>
+      
+          <div class="mt-4">
+
+            <h5>Dirección de envío</h5>
+
+            <div class="col">
+                <div class="row mt-3">
+                  
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-6">
+                    <p class="mb-0">Calle<p>
+                    <input type="text" class="form-control" name="direction" id="direction">
+                  </div>
+
+                  <div class="col-lg-3 col-md-3 col-sm-5 col-4">
+                    <p class="mb-0">Número</p>
+                    <input type="number" class="form-control mb-3" name="number" id="number">
+                  </div>
+
+                  <div class="w-100"></div>
+                  
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-6">
+                    <p class="mb-0">Esquina</p>
+                    <input type="text" class="form-control" name="esquina" id="esquina">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -76,6 +148,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
+  
 </body>
 
 </html>

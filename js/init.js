@@ -6,9 +6,6 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
-//Array de autos
-const LIST_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
-const urlprueba = "https://japceibal.github.io/emercado-api/products/50921.json";
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -44,13 +41,15 @@ let getJSONData = function(url){
 }
 document.addEventListener("DOMContentLoaded", function(){
   
-  let usuario = localStorage.getItem('email');
+  // para que en se vea solo la parte de antes del "@" del email del usuario
+  let email = localStorage.getItem('email');
+  let username = email.split("@");
  
   // Mostrar nombre del usuario
-  document.getElementById('nombreUsuario').innerHTML = usuario;
+  document.getElementById('nombreUsuario').innerHTML = username[0];
   
   // Verificar si hay usuario ingresado
-  if(usuario == null) {
+  if(email == null) {
     Swal.fire({
       title: 'No hay nadie ingresado',
       text: 'Por favor, inicie sesión',
