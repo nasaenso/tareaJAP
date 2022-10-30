@@ -128,9 +128,9 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     });
 
-        document.getElementById('buscador').addEventListener('keyup',()=>{
-            search(productsArray);
-        });
+    document.getElementById('buscador').addEventListener('keyup',()=>{
+        search(productsArray);
+    });
 
     document.getElementById('filtrar').addEventListener('click',()=>{
         filtrarPorPrecio();

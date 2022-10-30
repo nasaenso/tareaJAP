@@ -40,13 +40,7 @@ let getJSONData = function(url){
     });
 }
 document.addEventListener("DOMContentLoaded", function(){
-  
-  // para que en se vea solo la parte de antes del "@" del email del usuario
   let email = localStorage.getItem('email');
-  let username = email.split("@");
- 
-  // Mostrar nombre del usuario
-  document.getElementById('nombreUsuario').innerHTML = username[0];
   
   // Verificar si hay usuario ingresado
   if(email == null) {
@@ -57,7 +51,15 @@ document.addEventListener("DOMContentLoaded", function(){
     }).then(function() {
       window.location = "login.html";
       });
-  }
+
+  }else {
+    // para que en se vea solo la parte que hay antes del "@" del email del usuario
+    let username = email.split("@");
+ 
+    // Mostrar nombre del usuario
+    document.getElementById('nombreUsuario').innerHTML = username[0];
+}
+
  // Botón de cerrar sesión 
  document.getElementById('cierro').addEventListener('click', ()=>{
   Swal.fire({
