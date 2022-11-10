@@ -34,22 +34,41 @@ function showCartProducts(array){
     for(let i=0; i<array.length; i++){
         let product = array[i];
         showOnHTML +=`
-            
-            <tr>
-                <td class="cartSizing">
-                    <div><img src="${product.image}" class="mx-auto d-block img-fluid"></div>
-                </td>
-               
-                <td>${product.name}</td>
-                <td>${product.currency} <span>${product.unitCost}</span></td>
-                <td>
-                    <div class="d-flex justify-content-center">
-                        <input class="cartSizing form-control number" type="number" id="${product.id}" onchange="subtotal(${product.id}, ${product.unitCost})" value="${product.count}" min="1">
-                    </div>
-                </td>
-                <td><b>${product.currency}<span id="${'idSub'+product.id}" class="subFinal">${product.unitCost}</span></b></td>
-            </tr> 
+        
+            <div class="border-top border-end col-lg-2 col-md-2 col-12">
+                <p class="d-md-none mt-2 fs-4">Artículo ${i+1}</p>
+                <img src="${product.image}" class="p-3 img-fluid">
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-12 border-top border-end ">
+                <P class="d-md-none fw-bold">Nombre: </P>
+                <p class="mt-3">${product.name}</p>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-12 border-top border-end">
+                <p class="d-md-none fw-bold">Costo: </p>
+                <p class="mt-3">${product.currency} <span>${product.unitCost}</span></p>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-12 border-top border-end">
+                <p class="d-md-none fw-bold">Cantidad: </p>
+                <div class="d-flex justify-content-center mt-3">
+                    <input class="cartSizing form-control number" type="number" id="${product.id}" onchange="subtotal(${product.id}, ${product.unitCost})" value="${product.count}" min="1">
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-12 border-top">
+                <p class="d-md-none fw-bold">Subtotal: </p>
+                <div class="mt-3">
+                    <b>${product.currency} <span id="${'idSub'+product.id}" class="subFinal">${product.unitCost}</span></b>
+                </div>
+            </div>
+        
         `
+    }
+    if(array.length >=5){
+        document.getElementById('btnCollapse').classList.remove('d-md-none');
+        document.getElementById('unCollapse').classList.remove('d-md-block');
     }
 
     document.getElementById('cart').innerHTML = showOnHTML;   
@@ -217,5 +236,14 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
         form.classList.add('was-validated');    
     });
+    document.getElementById('btnCollapse').addEventListener('click',()=>{
+        let btnCollapse=document.getElementById('btnCollapse');
+        if(btnCollapse.innerHTML == "Mostrar carrito"){
+            btnCollapse.innerHTML = "Esconder carrito";
+        }else{
+            btnCollapse.innerHTML = "Mostrar carrito"
+        }
+         
+    })
     
 });

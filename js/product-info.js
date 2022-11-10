@@ -5,8 +5,10 @@ let addedProductToCart = [];
 let productID = localStorage.getItem('productID');
 
 // para que al hacer un nuevo comentario, solo se vea lo de antes del "@"
+
 let email = localStorage.getItem('email');
-let username = email.split("@");
+let username = JSON.parse(localStorage.getItem('profileInfo'));
+let usernameEmail = email.split("@");
 
 
 //Para mostrar la informacion del producto
@@ -105,8 +107,16 @@ function date(){
 
 // Para mostrar los nuevos comentarios
 function newComment(array){
+    let user = ""
+
+    if (username != null && username.firstName != "" && username.firstSurname != ""){
+        let nameComment = username.firstName+"_"+username.firstSurname;
+        user = nameComment.toLowerCase();
+    }else {
+        user = usernameEmail[0];
+    }
+
     let description = document.getElementById('opinion').value;
-    let user = username[0];
     let score =  document.getElementById('score').value
     let dateTime = date();
 
@@ -139,7 +149,7 @@ function productosRelacionados(array){
     
     for (let product of array.relatedProducts){
         showRelatedProducts +=`
-            <div class="mb-0 cursor-active" onclick="relatedProductID(${product.id})">
+            <div class="mb-0 cursor-active col-lg-12 col-md-12 col-6 col-sm-6" onclick="relatedProductID(${product.id})">
                             
                 <h6 class="mt-1">${product.name}</h6>
                 <img src="${product.image}" class="tamaño mx-auto d-block">
@@ -171,6 +181,13 @@ function addProduct(array){
 
         addedProductToCart.push(newProductObject);
         localStorage.setItem("addedProductArray", JSON.stringify(addedProductToCart));
+        
+        Swal.fire({
+            title: '¡Agregado con éxito',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
 }
 
@@ -213,6 +230,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         });
         document.getElementById('addToCart').addEventListener('click', ()=>{
             addProduct(productsInfoArray);
+            
             
         })
     });

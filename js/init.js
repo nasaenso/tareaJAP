@@ -41,6 +41,7 @@ let getJSONData = function(url){
 }
 document.addEventListener("DOMContentLoaded", function(){
   let email = localStorage.getItem('email');
+  let username = JSON.parse(localStorage.getItem('profileInfo'));
   
   // Verificar si hay usuario ingresado
   if(email == null) {
@@ -52,10 +53,12 @@ document.addEventListener("DOMContentLoaded", function(){
       window.location = "login.html";
       });
 
-  }else {
+  }else if (username != null && username.firstName != "" && username.firstSurname != "" ){
+    document.getElementById('nombreUsuario').innerHTML = username.firstName+"_"+username.firstSurname;
+    
+  }else{
     // para que en se vea solo la parte que hay antes del "@" del email del usuario
-    let username = email.split("@");
- 
+    username = email.split("@");
     // Mostrar nombre del usuario
     document.getElementById('nombreUsuario').innerHTML = username[0];
 }
@@ -77,6 +80,8 @@ document.addEventListener("DOMContentLoaded", function(){
       }).then(function() {
           window.location = "login.html";
             localStorage.removeItem('email');
+            localStorage.removeItem('profileInfo');
+            localStorage.removeItem('pfp');
         });
       }
     })

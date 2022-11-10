@@ -56,26 +56,29 @@
 
       <!-- tabla en donde van los productos -->
       <div class="mt-4 mb-4">
-        <h5 class="mb-3">Artículos a comprar</h5>
-        
-        <div class="table-responsive"> 
-          <table class="table table-bordered text-center">
-            <thead>
-              <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Costo</th>
-                  <th scope="col">Cantidad</th>
-                  <th scope="col">Subtotal</th>
-              </tr>
-            </thead>
-            <!-- donde va la tabla -->
-            <tbody id="cart">
 
-            </tbody>
-          </table>
+        <button class="btn btn-primary d-md-none mb-3 btn-lg" data-bs-toggle="collapse" href="#unCollapse" aria-expanded="false" aria-controls="unCollapse" id="btnCollapse">Mostrar carrito</button>
+
+        <h5 class="d-md-none">Artículos a comprar</h5>
+        
+        <div class="text-center collapse multi-collapse d-md-block" id="unCollapse">
+          <div class="d-none d-md-block fw-bold">
+            <div class="row border-top border-end border-start">
+              <div class="col-lg-2 col-md-2 border-end"></div>
+              <div class="col-lg-2 col-md-2 border-end" id="nameCart">Nombre</div>
+              
+              <div class="col-lg-3 col-md-3 border-end" id="costCart">Costo</div>
+              <div class="col-lg-2 col-md-2  border-end" id="cantCart">Cantidad</div>
+              <div class="col-lg-3 col-md-3" id="subCart">Subtotal</div>
+            </div>
+          </div>
+          
+          <div id="cart" class="row border-bottom border-end border-start"></div>
+          <button class="btn btn-primary d-md-none mb-3 mt-3" data-bs-toggle="collapse" href="#unCollapse" aria-expanded="false" aria-controls="unCollapse">Esconder carrito</button>
         </div>
-      </div><hr>
+
+      </div>
+      <hr>
 
       <!-- Tipos de envío -->
       <div class="mb-4">
@@ -110,7 +113,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3 col-md-3 col-sm-5 col-4">
+            <div class="col-lg-3 col-md-3 col-sm-4 col-4">
               <p class="mb-0">Número</p>
               <input type="number" class="form-control" name="number" id="number" required>
               <div class="invalid-feedback">
@@ -138,16 +141,16 @@
           
           <div class="list-group-item">
             <h6>Subtotal</h6>
-            <p class="mb-0">Costo unitario del producto por cantidad<span class="float-end">USD <span id="sub"></span></span></p>
+            <p class="">Costo unitario del producto por cantidad<span class="float-end">USD <span id="sub"></span></span></p>
           </div>
 
           <div class="list-group-item">
             <h6>Costo de envío</h6>
-            <p class="mb-0">Según el tipo de envío <span class="float-end">USD <span id="finalCost"></span></span></p>
+            <p class="">Según el tipo de envío <span class="float-end">USD <span id="finalCost"></span></span></p>
           </div>
 
           <div class="list-group-item">
-            <h6 class="mb-0">Total <span class="float-end fw-bold">USD <span id="total"></span></span></h6>
+            <h6 class="">Total <span class="float-end fw-bold">USD <span id="total"></span></span></h6>
           </div>
 
         </div>
@@ -184,17 +187,17 @@
                   <label for="payment" class="form-check-label">Tarjeta de crédito</label><hr>
 
                   <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                       <p class="">Número de targeta<p>
                       <input type="number" class="form-control" name="cardNumber" id="cardNumber" required>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-6">
                       <p class="">Código de seg.<p>
                       <input type="number" class="form-control" name="securityCode" id="securityCode" required>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                       <p class="">Vencimiento (MM/AA)<p>
                       <input type="number" class="form-control" name="expiration" id="expirationDate" required>
                     </div>
@@ -204,7 +207,7 @@
                   <label for="payment" class="form-check-label">Transferencia Bancaria</label><hr>
 
                   <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                       <p class="">Número de cuenta<p>
                       <input type="number" class="form-control" name="accNumber" id="accNumber" required>
                     </div>
