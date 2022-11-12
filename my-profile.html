@@ -11,6 +11,7 @@
   <!-- sweetAlert -->
   <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css" rel="stylesheet">
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <link href="css/dropzone.css" rel="stylesheet">
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -65,71 +66,71 @@
   </nav>
   <main>
     <div class="container">
-      <h2 class="mb-5 mt-3 text-center">Perfil</h2>
-
-      <div class="row">
-        <div id="profile" class="col-2 me-5 card">
-
-          <div class="mb-3 mt-3">
-            <img class="img-fluid rounded-circle" id="image" src="img/img_perfil.png">
-          </div>
-          
-          <div calss="row">
-            <div class="w-100">
-              <input type="file" id="file" class="form-control">
-            </div>
-            <div class="mb-5 mt-1">
-              <p id="alertImg" class="text-danger text-center m-0">Imagen no guardada</p>
-            </div>
-          </div>
-
-          <div class="text-center">
-            <button id="save" type="button" class="btn btn-success mb-1">Guardar cambios</button>
-            <button id="delete" class="btn btn-danger mb-1">Eliminar datos</button>
-            <button id="cancel" class="btn btn-secondary mb-2">Cancelar</button>
-            <button type="button" class="btn btn-primary mb-3" id="editBtn">Editar</button>
-
-          </div>
-        </div>
       
-        <form class="needs-validation col-4 ms-3" id="form" novalidate>
-          <div class="row">
-            <div class="col-12 mb-4">
-              <label for="firstName" class="form-label">Primer nombre*</label>
-              <input type="text" class="form-control" id="firstName" name="firstName" required>
-            </div>
+      <h2 class="p-4 text-center">Perfil</h2>
+      
+      <div class="ms-3 me-3">
+        <div class="row">
+          <div id="profile" class="card mb-4 shadow-sm custom-card col-lg-2 col-md-3 col-12 me-5">
 
-            <div class="col-12 mb-4">
-              <label for="firstSurname" class="form-label">Primer apellido*</label>
-              <input type="text" class="form-control" id="firstSurname" name="firstSurname" required>
-            </div>
-
-            <div class="col-12 mb-4">
-              <label for="emailProfile" class="form-label">Email*</label>
-              <input type="email" class="form-control" id="emailProfile" name="emailProfile" maxlength="0" required>
-            </div>
-          </div>
-          
-        </form>
-        
-        <div class="col-4">
-          <div class="row">
-            <div class="col-12 mb-4">
-              <label for="secondName" class="form-label">Segundo nombre</label>
-              <input type="text" class="form-control" id="secondName" name="secondName" >
+            <div class=" mb-3 mt-3">
+              <img class="rounded img-fluid card-img-top" id="image" src="img/img_perfil.png">
             </div>
             
-            <div class="col-12 mb-4">
-              <label for="secondSurname" class="form-label">Segundo apellido</label>
-              <input type="text" class="form-control" id="secondSurname" name="secondSurname">
+            <div class="card-body">
+              <div class="" name="editProfile" id="inputFile">
+                <input type="file" id="file" class="form-control">
+              </div>
             </div>
-            <div class="col-12 mb-4">
-              <label for="phoneNumber" class="form-label">Teléfono de contacto</label>
-              <input type="number" class="form-control" id="phoneNumber" name="phoneNumber">
+
+            <div class="d-grid mx-auto">
+              <button id="save" type="button" class="btn btn-success mb-2">Guardar cambios</button>
+              <!-- <button id="delete" name="editProfile" class="btn btn-danger mb-1">Eliminar datos</button> -->
+              <button id="cancel" class="btn btn-secondary mb-2">Cancelar</button>
+              <button id="edit" type="button" class="btn btn-primary mb-3">Editar</button>
+
             </div>
           </div>
-        </div> 
+        
+          <div class="col-lg-4 col-md-4 col-12" >
+            <form class="row needs-validation" id="form" novalidate>
+              <div class="col-12 mb-4">
+                <label for="firstName" class="form-label">Primer nombre*</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" required disabled>
+              </div>
+
+              <div class="col-12 mb-4">
+                <label for="firstSurname" class="form-label">Primer apellido*</label>
+                <input type="text" class="form-control" id="firstSurname" name="firstSurname" required disabled>
+              </div>
+
+              <div class="col-12 mb-4">
+                <label for="emailProfile" class="form-label">Email*</label>
+                <input type="email" class="form-control" id="emailProfile" name="emailProfile" maxlength="0" required disabled>
+              </div>
+            </form>
+            
+          </div>
           
+          <div class="col-12 col-lg-4 col-md-4">
+            <div class="row">
+              <div class="col-12 mb-4">
+                <label for="secondName" class="form-label">Segundo nombre</label>
+                <input type="text" class="form-control" id="secondName" name="secondName" disabled>
+              </div>
+              
+              <div class="col-12 mb-4">
+                <label for="secondSurname" class="form-label">Segundo apellido</label>
+                <input type="text" class="form-control" id="secondSurname" name="secondSurname" disabled>
+              </div>
+              <div class="col-12 mb-4">
+                <label for="phoneNumber" class="form-label">Teléfono de contacto</label>
+                <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" disabled>
+              </div>
+            </div>
+          </div> 
+    
+        </div>
       </div>
     </div>
     
@@ -147,6 +148,8 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>
+  <script src="js/dropzone.js"></script>
+
   
 </body>
 

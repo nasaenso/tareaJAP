@@ -39,6 +39,12 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+
+
+
+  
+
 document.addEventListener("DOMContentLoaded", function(){
   let email = localStorage.getItem('email');
   let username = JSON.parse(localStorage.getItem('profileInfo'));
@@ -48,20 +54,24 @@ document.addEventListener("DOMContentLoaded", function(){
     Swal.fire({
       title: 'No hay nadie ingresado',
       text: 'Por favor, inicie sesión',
-      icon: 'error'
+      icon: 'error',
+      confirmButton: false
     }).then(function() {
       window.location = "login.html";
       });
 
+      // por si ingresó los datos en el perfil
   }else if (username != null && username.firstName != "" && username.firstSurname != "" ){
     document.getElementById('nombreUsuario').innerHTML = username.firstName+"_"+username.firstSurname;
     
   }else{
-    // para que en se vea solo la parte que hay antes del "@" del email del usuario
+    // por si no ingreso los datos en el perfil
+    // para que se vea solo la parte que hay antes del "@" del email del usuario
     username = email.split("@");
     // Mostrar nombre del usuario
     document.getElementById('nombreUsuario').innerHTML = username[0];
-}
+  }
+
 
  // Botón de cerrar sesión 
  document.getElementById('cierro').addEventListener('click', ()=>{
@@ -71,19 +81,22 @@ document.addEventListener("DOMContentLoaded", function(){
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Sí'
+    confirmButtonText: 'Sí',
+    cancelButtonText: 'Cancelar'
   }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
         title: '¡Sesión cerrada con éxito!',
         icon: 'success'
-      }).then(function() {
+      })
+        localStorage.removeItem('email');
+        localStorage.removeItem('profileInfo');
+        localStorage.removeItem('pfp');
+        localStorage.removeItem('addedProductArray');
+        setTimeout(() => {
           window.location = "login.html";
-            localStorage.removeItem('email');
-            localStorage.removeItem('profileInfo');
-            localStorage.removeItem('pfp');
-        });
+        }, 1500);
       }
     })
- })
+  })
 })

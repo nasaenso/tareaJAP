@@ -34,38 +34,41 @@ function showCartProducts(array){
     for(let i=0; i<array.length; i++){
         let product = array[i];
         showOnHTML +=`
-        
-            <div class="border-top border-end col-lg-2 col-md-2 col-12">
-                <p class="d-md-none mt-2 fs-4">Artículo ${i+1}</p>
+        <div class="row border-start border-bottom m-0">
+            <div class="col-lg-2 col-md-2 col-12 border-top border-end">
+                <p class="d-md-none mt-2 fs-5 border-bottom fst-italic">Artículo ${i+1}</p>
                 <img src="${product.image}" class="p-3 img-fluid">
             </div>
 
             <div class="col-lg-2 col-md-2 col-12 border-top border-end ">
-                <P class="d-md-none fw-bold">Nombre: </P>
+                <p class="d-md-none mt-2 fw-bold">Nombre: </p>
                 <p class="mt-3">${product.name}</p>
             </div>
 
             <div class="col-lg-3 col-md-3 col-12 border-top border-end">
-                <p class="d-md-none fw-bold">Costo: </p>
+                <p class="d-md-none mt-2 fw-bold">Costo: </p>
                 <p class="mt-3">${product.currency} <span>${product.unitCost}</span></p>
             </div>
 
             <div class="col-lg-2 col-md-2 col-12 border-top border-end">
-                <p class="d-md-none fw-bold">Cantidad: </p>
-                <div class="d-flex justify-content-center mt-3">
+                <p class="d-md-none mt-2 fw-bold">Cantidad: </p>
+                <div class="d-flex justify-content-center mt-3 mb-2">
                     <input class="cartSizing form-control number" type="number" id="${product.id}" onchange="subtotal(${product.id}, ${product.unitCost})" value="${product.count}" min="1">
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-3 col-12 border-top">
-                <p class="d-md-none fw-bold">Subtotal: </p>
-                <div class="mt-3">
-                    <b>${product.currency} <span id="${'idSub'+product.id}" class="subFinal">${product.unitCost}</span></b>
+            <div class="col-lg-3 col-md-3 col-12 border-top border-end">
+                <p class="d-md-none mt-2 fw-bolder">Subtotal: </p>
+                <div class="mt-3 mb-2">
+                    <b>${product.currency} <span id="${'idSub'+product.id}" name="subFinal">${product.unitCost}</span></b>
                 </div>
             </div>
-        
+        </div>
+        <div class="col-12 d-md-none mb-3"></div>
+
         `
     }
+    // para mostrar el botón y esconder el cart
     if(array.length >=5){
         document.getElementById('btnCollapse').classList.remove('d-md-none');
         document.getElementById('unCollapse').classList.remove('d-md-block');
@@ -76,7 +79,7 @@ function showCartProducts(array){
 // para calcular el subtotal de costos
 function sumaSubtotal(){
 
-    let subFinales = document.getElementsByClassName('subFinal');
+    let subFinales = document.getElementsByName('subFinal');
     let currency = document.getElementsByTagName('b');
     
     for (let i=0; i< subFinales.length; i++){
@@ -90,7 +93,7 @@ function sumaSubtotal(){
                 totalnum += elementArraySub;
             }
     }
-    document.getElementById('sub').innerHTML = totalnum;
+    document.getElementById('sub').innerHTML = Math.round(totalnum);
     totalnum=0;
 }
 // para calcular los costos de envio
@@ -98,7 +101,7 @@ function tiposDeEnvios(){
     let cost = document.getElementById('sub').innerHTML;
 
     let finalCost = (cost * envio);
-    document.getElementById('finalCost').innerHTML = finalCost;
+    document.getElementById('finalCost').innerHTML = Math.round(finalCost);
 
     //Para que se ejecute cuando eligo los diferentes tipos de envío
     total();
@@ -119,13 +122,14 @@ function validation(){
     let expirationDate = document.getElementById('expirationDate');
     let cardNumber = document.getElementById('cardNumber');
     let invalid=document.getElementById("invalid");
+    
     let bool = true;
 
     if(accNumber.value != "" && typeOfPayment == "bank"){
         verificationModal.innerHTML="Transferencia bancaria";
         invalid.style.display = "none"
         verificationModal.style.display = "block"
-
+        
         bool=true;
 
     }else if(securityCode.value != "" && expirationDate.value != "" && cardNumber.value != "" && typeOfPayment == "card"){
@@ -141,6 +145,22 @@ function validation(){
     }
     return bool;
 }
+//para cambiar lo que dice el botón 
+function textBtnCollapse(){
+    let btnCollapse = document.getElementById('btnCollapse');
+    let array = document.getElementsByName('btnCollapse');
+
+    for(let i =0; i < array.length; i++){
+        array[i].addEventListener('click',()=>{
+
+            if(btnCollapse.innerHTML == "Mostrar carrito"){
+                btnCollapse.innerHTML = "Esconder carrito";
+            }else{
+                btnCollapse.innerHTML = "Mostrar carrito"
+            }
+        })
+    }
+}
 
 document.addEventListener('DOMContentLoaded',()=>{
     // url
@@ -149,7 +169,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     getJSONData(CART_URL).then(function(resultObj){
 
         if (resultObj.status === "ok"){
-            
+        
             cartInfoArray = resultObj.data.articles;
             addedProduct(cartInfoArray);
 
@@ -157,11 +177,12 @@ document.addEventListener('DOMContentLoaded',()=>{
             sumaSubtotal();
             tiposDeEnvios();
             total();
-            
+            textBtnCollapse(); 
         }
+
     });
-    document.getElementById('options').addEventListener('click', (e)=>{
-        switch (e.target.getAttribute("id")) {
+    document.getElementById('options').addEventListener('click', event=>{
+        switch (event.target.getAttribute("id")) {
             case 'premium':
                 envio = 0.15;
                 tiposDeEnvios();
@@ -176,18 +197,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             break;
         }
     });
-    // document.getElementById('premium').addEventListener('click',()=>{
-    //     envio = 15;
-    //     tiposDeEnvios();
-    // });
-    // document.getElementById('express').addEventListener('click',()=>{
-    //     envio = 7
-    //     tiposDeEnvios();
-    // });
-    // document.getElementById('standard').addEventListener('click',()=>{
-    //     envio = 5;
-    //     tiposDeEnvios();
-    // });
+
     document.getElementById('card').addEventListener('click',()=>{
         // cuando hago click en el pago por tarjeta, se me deshabilitan los campos de la transferencia bancaria y se me muestra
         // el texto selected
@@ -212,38 +222,28 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
     document.getElementById('save').addEventListener('click',()=>{
         validation();
-        
+
     });
     document.getElementById('btnsubmit').addEventListener("click", event=>{
         if (!validation() || !form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
         }else {
+            
             Swal.fire({
+               
+                footer: '<lottie-player src="https://assets9.lottiefiles.com/packages/lf20_lg6lh7fp.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>',
                 title: '¡Ha comprado con éxito!',
-                icon: 'success',
                 showConfirmButton: false,
-                // confirmButtonColor: '#3085d6',
-                // confirmButtonText: 'OK'
-                timer: 1500
+                
+                timer: 2000
                 }).then((
-                    //result
                     ) => {
-                // if (result.isConfirmed) {
                     document.getElementById('form').submit();
-                //  }
             })     
         }
         form.classList.add('was-validated');    
     });
-    document.getElementById('btnCollapse').addEventListener('click',()=>{
-        let btnCollapse=document.getElementById('btnCollapse');
-        if(btnCollapse.innerHTML == "Mostrar carrito"){
-            btnCollapse.innerHTML = "Esconder carrito";
-        }else{
-            btnCollapse.innerHTML = "Mostrar carrito"
-        }
-         
-    })
+    
     
 });

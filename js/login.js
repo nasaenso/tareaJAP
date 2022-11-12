@@ -24,10 +24,11 @@ function login (){
         location.href='index.html';
     }
 }
+
 //Funcione en el botón
 document.addEventListener('DOMContentLoaded', ()=>{
 
-    document.getElementById('inicio').addEventListener('click', ()=>{
+    document.getElementById('inicio').addEventListener('click', event=>{
         login(); 
     })
 })

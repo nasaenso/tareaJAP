@@ -189,11 +189,6 @@ a.custom-card:hover {
   color: orange;
 }
 
-/* Alinear lo que se ve en login */
-.cuadro {
-  text-align: center;
-}
-
 /* Marcar los bordes del login */
 .error {
   border-color: rgb(255, 78, 78);
@@ -203,10 +198,20 @@ a.custom-card:hover {
 .tamaño {
   width: 85%;
 }
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;}
 
 /* Para las imágenes del carrito y el tamaño del input */
 .cartSizing{
   max-width: 55px;
 
 }
+/* #btnsubmit.sticky {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+} */
 

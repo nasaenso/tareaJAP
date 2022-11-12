@@ -49,7 +49,7 @@ function mostrarImagenes(array){
 
     imagenenInicial =`
 
-            <div class="carousel-item active" data-bs-interval="10000">
+            <div class="carousel-item active">
             <img src="${array.images[0]}" class="d-block w-100" alt="Imágen de ejemplo del producto">
             </div>
         `;
@@ -58,7 +58,7 @@ function mostrarImagenes(array){
         let img = array.images[i];
         imagenes +=`
 
-            <div class="carousel-item" data-bs-interval="2000">
+            <div class="carousel-item">
             <img src="${img}" class="d-block w-100" alt="Imágen de ejemplo del producto">
             </div>
         `
@@ -75,7 +75,7 @@ function mostrarComments(array){
         comentarios += `
             
             <li class="list-group-item">
-                <div><b>${comentario.user}</b> - ${comentario.dateTime} -  ${puntuacion(comentario.score)}</div>
+                <div><b>${comentario.user}</b> - ${comentario.dateTime} -  <div class="d-sm-none"></div>${puntuacion(comentario.score)}</div>
                 ${comentario.description}
             </li>
         `
@@ -181,14 +181,13 @@ function addProduct(array){
 
         addedProductToCart.push(newProductObject);
         localStorage.setItem("addedProductArray", JSON.stringify(addedProductToCart));
-        
-        Swal.fire({
-            title: '¡Agregado con éxito',
-            icon: 'success',
-            showConfirmButton: false,
-            timer: 1500
-        })
     }
+    Swal.fire({
+        title: '¡Agregado con éxito',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500
+    })
 }
 
 document.addEventListener("DOMContentLoaded", function(e){

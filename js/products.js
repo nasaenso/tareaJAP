@@ -54,18 +54,20 @@ function sortSiFiltrado(array, criteria){
 
 //cual sort hacer
 function sortProducts(array, criteria){
-    if(criteria === "sortDesc") {
-      array.sort((ant,sig)=>sig.cost-ant.cost);
-    
-    }else if (criteria ==="sortAsc"){
-      array.sort((ant,sig)=>ant.cost-sig.cost);
-    
-    }else if (criteria ==="sortRel"){
-        array.sort((ant,sig)=>sig.soldCount-ant.soldCount);
+    switch (criteria) {
+        case "sortDesc":
+            array.sort((ant,sig)=>ant.cost-sig.cost);    
+            break;
+        case "sortAsc":
+            array.sort((ant,sig)=>sig.cost-ant.cost);
+            break;
+        case "sortRel":
+                array.sort((ant,sig)=>sig.soldCount-ant.soldCount);
+            break;
+        default:
+            break;
     }
     showProductsList(array);
-
-
 }
 
   function productsID(id) {
@@ -139,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById('limpiar').addEventListener('click',()=>{
         // Para que al darle a "limpiar" la array vuelva a estar completa
         arrayFiltrado= undefined;
-        
+        buscador.value ="";
         valorMax.value = "";
         valorMin.value = "";
         showProductsList(productsArray);
@@ -161,6 +163,5 @@ document.addEventListener("DOMContentLoaded", function(e){
         sortSiFiltrado(productsArray, criteria);
 
     });
-    showProductsList(productsArray);
 
 });
