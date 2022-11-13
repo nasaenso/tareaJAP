@@ -64,7 +64,7 @@ function showCartProducts(array){
                 </div>
             </div>
         </div>
-        <div class="col-12 d-md-none mb-3"></div>
+        <div class="col-12 d-md-none mb-4"></div>
 
         `
     }

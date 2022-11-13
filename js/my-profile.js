@@ -1,9 +1,9 @@
-let firstName = document.getElementById('firstName');
-let firstSurname = document.getElementById('firstSurname');
-let emailProfile = document.getElementById('emailProfile');
-let secondName = document.getElementById('secondName');
-let secondSurname = document.getElementById('secondSurname');
-let phoneNumber = document.getElementById('phoneNumber');
+let firstName1 = document.getElementById('firstName');
+let firstSurname1 = document.getElementById('firstSurname');
+let emailProfile1 = document.getElementById('emailProfile');
+let secondName1 = document.getElementById('secondName');
+let secondSurname1 = document.getElementById('secondSurname');
+let phoneNumber1 = document.getElementById('phoneNumber');
 let info = {};
 let srcData = "";
 let defaultIMG = document.getElementById('image').src;
@@ -57,11 +57,12 @@ function checkinfo(){
     info = JSON.parse(localStorage.getItem('profileInfo'));
     
     if(info != null){
-        firstName.value = info.firstName;
-        firstSurname.value = info.firstSurname;
-        secondName.value = info.secondName
-        secondSurname.value = info.secondSurname;
-        phoneNumber.value = info.phoneNumber;
+
+        firstName1.value = info.firstName;
+        firstSurname1.value = info.firstSurname;
+        secondName1.value = info.secondName
+        secondSurname1.value = info.secondSurname;
+        phoneNumber1.value = info.phoneNumber;
 
         disableExceptEmail(true);
         displayBtns("none", "none", "block", "none");
@@ -73,14 +74,15 @@ function checkinfo(){
 }
 // para guardar los datos en el local
 function saveProfileInfo(){
-    if(firstName.value != "" && firstSurname.value != "" && emailProfile.value != ""){
+    if(firstName1.value != "" && firstSurname1.value != "" && emailProfile1.value != ""){
+        console.log(info)
         
-        info.firstName = firstName.value
-        info.firstSurname = firstSurname.value
-        info.emailProfile = emailProfile.value;
-        info.secondName = secondName.value;
-        info.secondSurname = secondSurname.value
-        info.phoneNumber = phoneNumber.value;
+        info.firstName = firstName1.value
+        info.firstSurname = firstSurname1.value
+        info.emailProfile = emailProfile1.value;
+        info.secondName = secondName1.value;
+        info.secondSurname = secondSurname1.value
+        info.phoneNumber = phoneNumber1.value;
         
         localStorage.setItem('profileInfo',JSON.stringify(info));
     }
@@ -89,9 +91,13 @@ function saveProfileInfo(){
 document.addEventListener('DOMContentLoaded', ()=>{
 
     let email = localStorage.getItem('email');
-    emailProfile.value = email;
+    emailProfile1.value = email;
     
     checkinfo();
+    // por si no hay nada en el local
+    if (info == null){
+        info = {};
+    }
     
     document.getElementById('edit').addEventListener('click', ()=>{
 
@@ -108,11 +114,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
 
     })
-    // document.getElementById('delete').addEventListener('click', ()=>{ 
-    //     localStorage.removeItem('profileInfo');
-    //     localStorage.removeItem('pfp');
-    //     location.reload()
-    // })
+    
     document.getElementById('cancel').addEventListener('click', ()=>{
         location.reload();
     })

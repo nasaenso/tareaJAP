@@ -91,19 +91,19 @@ function showProductsList(array){
     for(let producto of array){ 
 
         htmlContentToAppend += `
-        <div onclick="productsID(${producto.id})"class="list-group-item list-group-item-action cursor-active">
+        <div onclick="productsID(${producto.id})" class=" col-12 list-group-item list-group-item-action cursor-active">
             <div class="row">
                 <div class="col-3">
                     <img src="` + producto.image + `" alt="product image" class="img-thumbnail">
                 </div>
-                <div class="col">
+                <div class="col-9">
                     <div class="d-flex w-100 justify-content-between">
                         <div class="mb-1">
                         <h4>`+ producto.name + ` - ` + producto.currency + ` ` + producto.cost +`</h4> 
                         
                         <p> `+ producto.description +`</p> 
                         </div>
-                        <small class="text-muted">` + producto.soldCount + ` vendidos</small> 
+                        <small class="text-muted text-center">` + producto.soldCount + ` vendidos</small> 
                     </div>
 
                 </div>
