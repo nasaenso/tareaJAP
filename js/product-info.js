@@ -183,7 +183,7 @@ function addProduct(array){
         localStorage.setItem("addedProductArray", JSON.stringify(addedProductToCart));
     }
     Swal.fire({
-        title: '¡Agregado con éxito',
+        title: '¡Agregado con éxito!',
         icon: 'success',
         showConfirmButton: false,
         timer: 1500
