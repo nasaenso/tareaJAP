@@ -75,7 +75,6 @@ function checkinfo(){
 // para guardar los datos en el local
 function saveProfileInfo(){
     if(firstName1.value != "" && firstSurname1.value != "" && emailProfile1.value != ""){
-        console.log(info)
         
         info.firstName = firstName1.value
         info.firstSurname = firstSurname1.value

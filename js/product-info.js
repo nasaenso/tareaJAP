@@ -175,7 +175,7 @@ function addProduct(array){
     
     let compareArray = JSON.stringify(addedProductToCart);
     let compareNewObject = JSON.stringify(newProductObject.id);
-    
+
 
     if (!(compareArray.includes(compareNewObject) || compareNewObject == peugeot.id)){
 

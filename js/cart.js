@@ -1,12 +1,22 @@
 let cartInfoArray = [];
 let totalnum = 0;
 let envio = 0.05;
-
+let added = [];
 let typeOfPayment = "";
+
+let finalCost = 0;
+let sub = 0
+let totalCost = 0;
+
+let accNumber = document.getElementById('accNumber');
+let securityCode = document.getElementById('securityCode');
+let expirationDate = document.getElementById('expirationDate');
+let cardNumber = document.getElementById('cardNumber');
+
 
 // para agregar los productos del local al carrito
 function addedProduct(array){
-    let added = "";
+    
     added = JSON.parse(localStorage.getItem('addedProductArray'))
     if (added != null){
 
@@ -17,9 +27,10 @@ function addedProduct(array){
 }
 
 // para calcular el subtotal
-function subtotal(id, unitCost){
+function subtotal(id, unitCost, i){
     let count= document.getElementById(id).value;
     let subtotal = count * unitCost;
+    cartInfoArray[i].count = count;
 
     document.getElementById('idSub'+id).innerHTML = " " + subtotal;
     // para que se ejecuten cuando hago el cambio
@@ -29,10 +40,12 @@ function subtotal(id, unitCost){
 }
 
 // para mostrar los productos en la tabla
-function showCartProducts(array){
+function showCartProducts(){
     let showOnHTML ="";
-    for(let i=0; i<array.length; i++){
-        let product = array[i];
+    
+    for(let i = 0; i <cartInfoArray.length; i++){
+        
+        let product = cartInfoArray[i];
         showOnHTML +=`
         <div class="row border-start border-bottom m-0">
             <div class="col-lg-2 col-md-2 col-12 border-top border-end">
@@ -53,28 +66,36 @@ function showCartProducts(array){
             <div class="col-lg-2 col-md-2 col-12 border-top border-end">
                 <p class="d-md-none mt-2 fw-bold">Cantidad: </p>
                 <div class="d-flex justify-content-center mt-3 mb-2">
-                    <input class="cartSizing form-control number" type="number" id="${product.id}" onchange="subtotal(${product.id}, ${product.unitCost})" value="${product.count}" min="1">
+                    <input class="cartSizing form-control number" type="number" id="${product.id}" onchange="subtotal(${product.id}, ${product.unitCost}, ${i})" value="${product.count}" min="1">
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-3 col-12 border-top border-end">
+            <div class="col-lg-2 col-md-2 col-12 border-top border-end">
                 <p class="d-md-none mt-2 fw-bolder">Subtotal: </p>
                 <div class="mt-3 mb-2">
                     <b>${product.currency} <span id="${'idSub'+product.id}" name="subFinal">${product.unitCost}</span></b>
                 </div>
             </div>
+            <div class="col-lg-1 col-md-1 col-12 border-top border-end" name="delete">
+                <div class="mt-3 mb-2">
+                <i class="fas fa-trash"></i>
+                </div>
+            </div>
+
         </div>
         <div class="col-12 d-md-none mb-4"></div>
 
         `
     }
     // para mostrar el botón y esconder el cart
-    if(array.length >=5){
+    if(cartInfoArray.length >=5){
         document.getElementById('btnCollapse').classList.remove('d-md-none');
         document.getElementById('unCollapse').classList.remove('d-md-block');
     }
 
     document.getElementById('cart').innerHTML = showOnHTML;   
+    deleteProducts();
+    
 }
 // para calcular el subtotal de costos
 function sumaSubtotal(){
@@ -103,39 +124,39 @@ function tiposDeEnvios(){
     let finalCost = (cost * envio);
     document.getElementById('finalCost').innerHTML = Math.round(finalCost);
 
-    //Para que se ejecute cuando eligo los diferentes tipos de envío
+    //Para que se ejecute cuando elijo los diferentes tipos de envío
     total();
 }
 // para calcular el total de costos
 function total(){
-    let cost2 = parseFloat(document.getElementById('finalCost').innerHTML);
-    let cost1 = parseFloat(document.getElementById('sub').innerHTML);
-
-    let cost3 = cost1 + cost2;
-    document.getElementById('total').innerHTML = cost3;
+    finalCost = parseFloat(document.getElementById('finalCost').innerHTML);
+    sub = parseFloat(document.getElementById('sub').innerHTML);
+    
+    totalCost = finalCost + sub;
+    document.getElementById('total').innerHTML = totalCost;
 }
 //Para validar la modal
 function validation(){
     let verificationModal = document.getElementById('feedbackPayment');
-    let accNumber = document.getElementById('accNumber');
-    let securityCode = document.getElementById('securityCode');
-    let expirationDate = document.getElementById('expirationDate');
-    let cardNumber = document.getElementById('cardNumber');
     let invalid=document.getElementById("invalid");
     
     let bool = true;
 
-    if(accNumber.value != "" && typeOfPayment == "bank"){
+    if(accNumber.value != "" && typeOfPayment == "Transferencia Bancaria"){
         verificationModal.innerHTML="Transferencia bancaria";
         invalid.style.display = "none"
         verificationModal.style.display = "block"
+        securityCode.value = ""; 
+        expirationDate.value = "";
+        cardNumber.value = "";
         
         bool=true;
 
-    }else if(securityCode.value != "" && expirationDate.value != "" && cardNumber.value != "" && typeOfPayment == "card"){
+    }else if(securityCode.value != "" && expirationDate.value != "" && cardNumber.value != "" && typeOfPayment == "Tarjeta de Crédito"){
         verificationModal.innerHTML="Targeta de crédito";
         invalid.style.display = "none"
         verificationModal.style.display = "block"
+        accNumber.value = "";
 
         bool = true;
     }else {
@@ -161,11 +182,26 @@ function textBtnCollapse(){
         })
     }
 }
+function deleteProducts(){
+    let deleteArray = document.getElementsByTagName('i');
+    for (let i=0; i< deleteArray.length; i++){
+        
+        deleteArray[i].addEventListener('click', ()=>{
+            cartInfoArray.splice(i, 1);
+            showCartProducts();
+            localStorage.setItem("addedProductArray", JSON.stringify(cartInfoArray));
+    
+        });
+    };
+    sumaSubtotal();
+    tiposDeEnvios();
+    total();
+};
 
 document.addEventListener('DOMContentLoaded',()=>{
     // url
     const CART_URL= CART_INFO_URL + 25801 +EXT_TYPE;
-    
+
     getJSONData(CART_URL).then(function(resultObj){
 
         if (resultObj.status === "ok"){
@@ -173,13 +209,9 @@ document.addEventListener('DOMContentLoaded',()=>{
             cartInfoArray = resultObj.data.articles;
             addedProduct(cartInfoArray);
 
-            showCartProducts(cartInfoArray);
-            sumaSubtotal();
-            tiposDeEnvios();
-            total();
+            showCartProducts();
             textBtnCollapse(); 
         }
-
     });
     document.getElementById('options').addEventListener('click', event=>{
         switch (event.target.getAttribute("id")) {
@@ -206,7 +238,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         expirationDate.disabled = false; 
         cardNumber.disabled = false;
 
-        typeOfPayment = "card";
+        typeOfPayment = "Tarjeta de Crédito";
         
     });
     document.getElementById('bank').addEventListener('click',()=>{
@@ -217,18 +249,24 @@ document.addEventListener('DOMContentLoaded',()=>{
         cardNumber.disabled = true;
         accNumber.disabled = false;
 
-        typeOfPayment = "bank";
-        
+        typeOfPayment = "Transferencia Bancaria";
     });
+
     document.getElementById('save').addEventListener('click',()=>{
         validation();
 
     });
     document.getElementById('btnsubmit').addEventListener("click", event=>{
+        let esquina = document.getElementById('esquina').value;
+        let calle = document.getElementById('direction').value;
+        let numero = document.getElementById('number').value;
+
         if (!validation() || !form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
         }else {
+            
+             
             
             Swal.fire({
                
@@ -239,11 +277,34 @@ document.addEventListener('DOMContentLoaded',()=>{
                 timer: 2000
                 }).then((
                     ) => {
-                    document.getElementById('form').submit();
+                    
+                    // location.reload();
+                    fetch('http://localhost:3000/client-info', {
+                
+                headers: { "Content-Type": "application/json; charset=utf-8" },
+                method: 'POST',
+                
+                body: JSON.stringify({
+                user: document.getElementById("nombreUsuario").innerHTML,
+                email: localStorage.getItem('email'),
+                calle: calle,
+                numero: numero,
+                esquina: esquina,
+                products: cartInfoArray,
+                Subtotal: sub,
+                envioCost: finalCost,
+                totalCost: totalCost,
+                typeOfPayment: typeOfPayment,
+                accNumber: accNumber.value,
+                securityCode: securityCode.value,
+                expirationDate: expirationDate.value,
+                cardNumber: cardNumber.value    
+                })
+            })
+            .then(response => response.text); 
+            document.getElementById('form').submit();
             })     
         }
-        form.classList.add('was-validated');    
-    });
-    
-    
+        form.classList.add('was-validated');         
+    }); 
 });
